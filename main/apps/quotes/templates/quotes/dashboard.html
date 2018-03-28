@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Quotes</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'quotes/main.css' %}" media="screen" title="no title" charset="utf-8">
+    <!-- <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+    <script>
+    $(document).ready(function() {
+        $('#favQuotes').hide();
+        $('#faves').mouseover(function() {
+            $('#faves>#favQuotes').fadeIn();
+        })
+    }) -->
+    </script>
+</head>
+
+<body>
+    <header>
+        {% for user in Users %}
+        <h2>Wudduuup {{ user.name }}</h2>
+        {% endfor %}
+        <p>
+           <button> <a href="/exit">Logout</a></button>
+        </p>
+        {% if errors %}
+         {% for errors in errorz %}
+        <h3>{{ errors }}</h3>
+        {% endfor %} {% endif %}
+    </header>
+
+    <div id="wrapper">
+
+        <div id="scrollBox">
+            <h4>Quotes</h4>
+            {% for user in Users %} {% for quotE in Quotes %}
+            <div id="quoter">
+                <p>{{quotE.quote}}</p>
+                <h6>-->
+                    <a href="/look"> {{quotE.quotedBy}}</a>
+                </h6>
+                <h6>
+                    <button>
+                        <a href="/addTo"> Add to my list</a>
+                    </button>
+                </h6>
+            </div>{% endfor %} {% endfor %}
+        </div>
+
+        <div id="faves">
+            <h4>Favorites</h4>
+             {% for user in Users %} {% for quotE in Quotes %}
+            <div id="favQuotes">
+                <p>{{quotE.quote}}</p>
+                <h6>-->
+                    <a href="/look"> {{quotE.quotedBy}}</a>
+                </h6>
+                <h6>
+                    <button>
+                        <a href="/rem"> Remove from my list</a>
+                    </button>
+                </h6>
+            </div>
+            {% endfor %} {% endfor %} 
+        </div>
+
+        <div class="addQuote">
+            <h4>Add a Quote</h4>
+            <form action="/addQ" method="POST">
+                {% csrf_token %}
+                <div id="addQuote">
+                    Quoted By:
+                    <input id="quotedBy" type="text" name="quotedBy"> Quote:
+                    <input id="quote" type="text" name="quote"> Full name:
+                    <input id="addBy" type="text" name="addBy">
+                    <input id="check" type="submit" name="submit" value="submit">
+                </div>
+            </form>
+        </div>
+
+
+
+    </div>
+
+
+
+</body>
+
+</html>

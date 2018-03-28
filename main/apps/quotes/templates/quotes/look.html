@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Quotes</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'quotes/main.css' %}" media="screen" title="no title" charset="utf-8">
+</head>
+
+<body>
+    <header id="looker">
+        {% for user in Users %} {% if user.name == name %}
+        <h3>Posts by {{ user.name }}</h3>
+        {% endif %}{% endfor %}
+        <p>
+            <a href="/dash">Dashboard</a> || <a href="/exit">Logout</a>
+        </p>
+    </header>
+
+    <div id="wrapper">
+
+        <div id="viewBox">
+            {% for user in Users %} {% for quotE in Quotes %}
+            <div id="yourQuotes">
+                <p>{{quotE.quote}}</p>
+                <h6>-->{{quotE.quotedBy}}</h6>
+            </div>{% endfor %} {% endfor %}
+        </div>
+
+
+
+
+    </div>
+
+
+
+</body>
+
+</html>
+
+<!-- if button.on(click, function {
+    fav.append(this)
+})
+if user.name - :name {
+
+} -->
